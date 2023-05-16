@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Your custom dark theme styles here */
+    </style>
+</head>
+
+<body class="bg-gray-900 text-white">
+<header class="py-4 px-8 bg-gray-800">
+    <h1 class="text-3xl font-bold">My Blog</h1>
+    <a href="/" class="text-blue-200 hover:text-blue-300">Back to Homepage</a>
+
+    <!-- Your header content here -->
+</header>
+
+<main class="container mx-auto py-8">
+    <div style="background-color: #f2f2f2; border: 1px solid #ddd; border-radius: 10px; position: relative;">
+        <div style="padding: 20px; display: flex; align-items: flex-start;">
+            <!-- Image Section -->
+            <div style="margin-right: 20px;">
+                <img src="https://placehold.co/800" alt="Image" style="width: 50%;">
+            </div>
+
+            <!-- Title and Article Body Section -->
+            <div>
+                <!-- Title Section -->
+                <h2 style="color: #333; font-size: 24px; margin-bottom: 10px;"> {{ article.title }}</h2>
+
+                <!-- Article Body Section -->
+                <p style="color: #555; font-size: 16px; line-height: 1.5; margin-bottom: 10px;">{{ article.body }}</p>
+            </div>
+        </div>
+        <!-- Article Author Section -->
+        <p style="color: #999; font-size: 14px; position: absolute; bottom: 10px; right: 10px;">
+            Author Name: <a href="/user/{{ article.getUser.getId }}">{{ article.getUser.getName }}</a>
+        </p>
+    </div>
+
+    <section style="border-radius: 8px; background-color: #f1f1f1; padding: 10px;">
+        <h3 class="text-xl font-bold mb-4">Comments</h3>
+        {% if comments %}
+            <ul>
+                {% for comment in comments %}
+                    <li style="border: 1px solid #000; padding: 10px; margin-bottom: 10px; border-radius: 4px; background-color: #fff;">
+                        <p><strong class="black">By: <span style="color: black">{{ comment.getName }}</span> Email: <span style="color: black;">{{ comment.getEmail }}</span></strong></p>
+                        <p style="color: black;">{{ comment.getBody }}</p>
+                        <p>  </p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No comments yet.</p>
+        {% endif %}
+    </section>
+
+</main>
+
+<footer class="py-4 px-8 bg-gray-800">
+    <!-- Your footer content here -->
+</footer>
+
+<script src="https://cdn.tailwindcss.com/2.2.15/tailwind.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Your custom dark theme styles here */
+    </style>
+</head>
+
+<body class="bg-gray-900 text-white">
+<header class="py-4 px-8 bg-gray-800">
+    <h1 class="text-3xl font-bold">My Blog</h1>
+    <!-- Your header content here -->
+</header>
+
+<main class="container mx-auto py-8">
+    {% for article in articles|slice((current_page-1)*limit, limit) %}
+        <a href="/post/{{ article.getId }}" class="mb-8 rounded-lg p-6">
+            <div style="background-color: #f2f2f2; border: 1px solid #ddd; border-radius: 10px; position: relative;">
+                <div style="padding: 20px; display: flex; align-items: flex-start;">
+                    <!-- Image Section -->
+                    <div style="margin-right: 20px;">
+                        <img src="https://placehold.co/600x400" alt="Image" style="width: 100%;">
+                    </div>
+
+                    <!-- Title and Article Body Section -->
+                    <div>
+                        <!-- Title Section -->
+                        <h2 style="color: #333; font-size: 24px; margin-bottom: 10px;"> {{ article.title }}</h2>
+
+                        <!-- Article Body Section -->
+                        <p style="color: #555; font-size: 16px; line-height: 1.5; margin-bottom: 10px;">{{ article.body }}</p>
+                    </div>
+                </div>
+                <!-- Article Author Section -->
+                <p style="color: #999; font-size: 14px; position: absolute; bottom: 10px; right: 10px;">
+                    Author Name: <a href="/user/{{ article.getUser.getId }}">{{ article.getUser.getName }}</a>
+                </p>
+            </div>
+        </a>
+    {% endfor %}
+</main>
+
+
+
+
+
+
+
+
+<div class="flex justify-center mt-8">
+    <ul class="flex space-x-4">
+        {% if num_pages > 1 %}
+            <div class="flex justify-center mb-8">
+                <div class="page-switcher flex items-center">
+                    {% if current_page > 1 %}
+                        <a href="?page={{ current_page - 1 }}"
+                           class="bg-gray-700 hover:bg-gray-600 text-gray-100 px-3 py-2 rounded">Previous</a>
+                    {% endif %}
+                    <span class="text-gray-500 px-3">({{ current_page }}/{{ num_pages }})</span>
+                    {% if current_page < num_pages %}
+                        <a href="?page={{ current_page + 1 }}"
+                           class="bg-gray-700 hover:bg-gray-600 text-gray-100 px-3 py-2 rounded">Next</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    </ul>
+</div>
+
+
+<footer class="py-4 px-8 bg-gray-800">
+    <!-- Your footer content here -->
+</footer>
+
+<script src="https://cdn.tailwindcss.com/2.2.15/tailwind.min.js"></script>
+</body>
+
+</html>

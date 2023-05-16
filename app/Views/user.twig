@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Your custom dark theme styles here */
+    </style>
+</head>
+
+<body class="bg-gray-900 text-white">
+<header class="py-4 px-8 bg-gray-800">
+    <h1 class="text-3xl font-bold">User Profile</h1>
+    <a href="/" class="text-blue-200 hover:text-blue-300">Back to Homepage</a>
+</header>
+
+<main class="container mx-auto py-8">
+    <section class="mb-8 bg-gray-200 rounded-lg p-6">
+        <h2 class="text-2xl font-bold text-black">User Information</h2>
+        <ul class="text-black">
+            <li><strong>ID:</strong> {{ user.id }}</li>
+            <li><strong>Name:</strong> {{ user.name }}</li>
+            <li><strong>Username:</strong> {{ user.username }}</li>
+            <li><strong>Email:</strong> {{ user.email }}</li>
+            <li>
+                <strong>Address:</strong>
+                <ul>
+                    <li><strong>Street:</strong> {{ user.address.street }}</li>
+                    <li><strong>Suite:</strong> {{ user.address.suite }}</li>
+                    <li><strong>City:</strong> {{ user.address.city }}</li>
+                    <li><strong>Zipcode:</strong> {{ user.address.zipcode }}</li>
+                    <li><strong>Geo:</strong> Lat: {{ user.address.geo.lat }}, Lng: {{ user.address.geo.lng }}</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <section class="mb-8 bg-gray-200 rounded-lg p-6">
+        <h2 class="text-2xl font-bold text-black">Posts</h2>
+        {% if posts is not empty %}
+            <ul>
+                {% for post in posts %}
+                    <li>
+                        <a href="/post/{{ post.getId }}">
+                            <h3 class="text-xl font-bold text-black"> {{ loop.index }}. {{ post.title }}</h3>
+                        </a>
+                        <p class="text-black">{{ post.body }}</p>
+                    </li>
+                    {% if not loop.last %}
+                        <hr class="my-4">
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-black">No posts available.</p>
+        {% endif %}
+    </section>
+
+
+
+
+    <section class="mb-8 bg-gray-200 rounded-lg p-6">
+        <h2 class="text-2xl font-bold text-black">Comments</h2>
+        {% if comments is not empty %}
+            <ul>
+                {% for comment in comments %}
+                    <li>
+                        <h3 class="text-xl font-bold text-black">Post: {{ comment.postId }}</h3>
+                        <p>{{ comment.body }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-black">No comments available.</p>
+        {% endif %}
+    </section>
+
+    <style>
+        .dropdown-toggle {
+            display: none;
+        }
+
+        .dropdown-label {
+            position: relative;
+            padding-left: 20px;
+            cursor: pointer;
+            color: black;
+        }
+
+        .dropdown-label::before {
+            content: "▼";
+            position: absolute;
+            left: 0;
+            color: black;
+        }
+
+        .dropdown-toggle:checked + .dropdown-label::before {
+            content: "▲";
+        }
+
+        .dropdown-menu {
+            display: none;
+        }
+
+        .dropdown-toggle:checked ~ .dropdown-menu {
+            display: block;
+        }
+    </style>
+
+    <section class="mb-8 bg-gray-200 rounded-lg p-6">
+        <h2 class="text-2xl font-bold text-black">Albums</h2>
+        {% if albums is not empty %}
+            <ul>
+                {% for album in albums %}
+                    <li>
+                        <h3 class="text-xl text-black">{{ loop.index }}. {{ album.title }}</h3>
+                        <div class="dropdown">
+                            <input type="checkbox" id="dropdown-toggle-{{ loop.index }}" class="dropdown-toggle">
+                            <label for="dropdown-toggle-{{ loop.index }}" class="dropdown-label">Select a Photo</label>
+                            <ul class="dropdown-menu">
+                                {% for photo in album.getPhotos %}
+                                    <li>
+                                        <img src="{{ photo.getThumbnailUrl() }}" alt="{{ photo.title }}" class="w-10 h-10 rounded-lg">
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-black">No albums available.</p>
+        {% endif %}
+    </section>
+
+
+
+
+
+    <section class="mb-8 bg-gray-200 rounded-lg p-6">
+        <h2 class="text-2xl font-bold text-black">Todos</h2>
+        {% if todos is not empty %}
+            <ul>
+                {% for todo in todos %}
+                    <li>
+                        <input type="checkbox" {% if todo.completed %}checked{% endif %} class="mr-2 checkbox-green">
+                        <span class="text-black">{{ todo.title }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No todos available.</p>
+        {% endif %}
+    </section>
+</main>
+
+<footer class="py-4 px-8 bg-gray-800">
+    <!-- Your footer content here -->
+</footer>
+
+<script src="https://cdn.tailwindcss.com/2.2.15/tailwind.min.js"></script>
+</body>
+
+</html>
