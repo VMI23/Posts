@@ -1,7 +1,8 @@
 <?php
 
-namespace Blog\Core;
+declare(strict_types=1);
 
+namespace Blog\Core;
 
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
@@ -37,12 +38,11 @@ class Router
                 return null;
             case Dispatcher::FOUND:
                 $handler = $routeInfo[1];
-                $vars = $routeInfo[2]; // Parameters from query
+                $vars = $routeInfo[2];
 
                 [$controllerName, $methodName] = $handler;
                 $controller = new $controllerName;
 
-                // Can pass the array of query parameters to the controller method using the splat operator
                 return $controller->{$methodName}($vars);
         }
 

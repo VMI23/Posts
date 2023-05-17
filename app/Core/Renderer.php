@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Blog\Core;
 
 use Twig\Environment;
@@ -15,7 +17,7 @@ class Renderer
         $this->twig = new Environment($loader);
     }
 
-    public function render(TwigView $view)
+    public function render(TwigView $view): string
     {
         return $this->twig->render($view->getPath() . '.twig', $view->getData());
     }

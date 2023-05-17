@@ -2,22 +2,20 @@
 
 declare(strict_types=1);
 
+namespace Blog\Models;
 
-namespace Blog\models;
-
-class Post
+class Article
 {
     private User $user;
     private int $id;
     private string $title;
     private string $body;
-
     private array $comments;
 
     public function __construct(User $user, int $id, string $title, string $body, array $comments = [])
     {
-        $this->id = $id;
         $this->user = $user;
+        $this->id = $id;
         $this->title = $title;
         $this->body = $body;
         $this->comments = $comments;
@@ -28,12 +26,10 @@ class Post
         return $this->id;
     }
 
-
     public function getUser(): User
     {
         return $this->user;
     }
-
 
     public function getTitle(): string
     {
@@ -49,5 +45,4 @@ class Post
     {
         return $this->comments;
     }
-
 }

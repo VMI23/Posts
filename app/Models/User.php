@@ -2,8 +2,7 @@
 
 declare(strict_types=1);
 
-
-namespace Blog\models;
+namespace Blog\Models;
 
 use stdClass;
 
@@ -38,53 +37,43 @@ class User
         $this->company = $company;
     }
 
-
     public function getId(): int
     {
         return $this->id;
     }
-
 
     public function getName(): string
     {
         return $this->name;
     }
 
-
     public function getUsername(): string
     {
         return $this->username;
     }
-
 
     public function getEmail(): string
     {
         return $this->email;
     }
 
-
     public function getAddress(): stdClass
     {
         return $this->address;
     }
-
 
     public function getPhone(): string
     {
         return $this->phone;
     }
 
-
     public function getWebsite(): string
     {
         return $this->website;
     }
 
-
     public function getCompany(): stdClass
     {
         return $this->company;
     }
-
-
 }

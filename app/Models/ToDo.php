@@ -1,10 +1,11 @@
 <?php
 
-namespace Blog\models;
+declare(strict_types=1);
+
+namespace Blog\Models;
 
 class ToDo
 {
-
     private int $userId;
     private int $id;
     private string $title;
@@ -18,28 +19,23 @@ class ToDo
         $this->completed = $completed;
     }
 
-
     public function getUserId(): int
     {
         return $this->userId;
     }
-
 
     public function getId(): int
     {
         return $this->id;
     }
 
-
     public function getTitle(): string
     {
         return $this->title;
     }
 
-
     public function isCompleted(): bool
     {
         return $this->completed;
     }
-
 }

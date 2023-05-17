@@ -1,13 +1,14 @@
 <?php
 
-namespace Blog\models;
+declare(strict_types=1);
+
+namespace Blog\Models;
 
 class Album
 {
     private int $userId;
     private int $id;
     private string $title;
-
     private array $photos;
 
     public function __construct(int $userId, int $id, string $title, array $photos = [])
@@ -18,18 +19,15 @@ class Album
         $this->photos = $photos;
     }
 
-
     public function getUserId(): int
     {
         return $this->userId;
     }
 
-
     public function getId(): int
     {
         return $this->id;
     }
-
 
     public function getTitle(): string
     {
@@ -40,5 +38,4 @@ class Album
     {
         return $this->photos;
     }
-
 }
