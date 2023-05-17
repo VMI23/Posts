@@ -21,7 +21,7 @@ class Cache
 
     private static function getCacheFilePath(string $key): string
     {
-        return '/home/vitalijs/Desktop/BLOG Project/app/Cache/' . $key . '.json';
+        return __DIR__.'/Cache/' . $key . '.json';
     }
 
     public static function get(string $key)
