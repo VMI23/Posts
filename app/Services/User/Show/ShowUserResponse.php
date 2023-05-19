@@ -10,14 +10,14 @@ class ShowUserResponse
 {
     private User $user;
     private array $albums;
-    private array $posts;
+    private array $articles;
     private array $todos;
 
-    public function __construct(User $user, array $albums, array $posts, array $todos)
+    public function __construct(User $user, array $albums, array $articles, array $todos)
     {
         $this->user = $user;
         $this->albums = $albums;
-        $this->posts = $posts;
+        $this->articles = $articles;
         $this->todos = $todos;
     }
 
@@ -31,9 +31,9 @@ class ShowUserResponse
         return $this->albums;
     }
 
-    public function getPosts(): array
+    public function getArticles(): array
     {
-        return $this->posts;
+        return $this->articles;
     }
 
     public function getTodos(): array
